@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Öğrenci Paneli</title>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="js/firebase-config.js"></script>
+
+<style>
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  color: #0f172a;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: rgba(255,255,255,.82);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,.9);
+  padding: 34px;
+  border-radius: 28px;
+  width: 330px;
+  box-shadow: 0 24px 70px rgba(37, 99, 235, .14);
+}
+
+.alert {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 15px;
+  border-radius: 16px;
+  margin-top: 20px;
+  display: none;
+  font-weight: bold;
+}
+
+button {
+  margin-top:15px;
+  padding:12px 18px;
+  border-radius:16px;
+  border:none;
+  background:#2563eb;
+  color:white;
+  cursor:pointer;
+  font-weight: bold;
+}
+
+a {
+  display: inline-block;
+  margin-top: 18px;
+  color: #2563eb;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <h2>Öğrenci Durumu</h2>
+  <p id="durum">Yükleniyor...</p>
+
+  <div id="uyari" class="alert">
+    ⚠️ Çıkış yapmayı unuttun!
+  </div>
+
+  <button onclick="cikisOnayi()">Çıkış Yapıldı</button>
+  <br>
+  <a href="landing.html">Tanıtım sayfasına dön</a>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const uid = params.get("uid");
+
+if(!uid){ alert("UID yok!"); }
+
+const uidToName = {
+  "43-44-84-2D": "Öğrenci 1",
+  "83-E5-B6-2C": "Öğrenci 2",
+  "63-85-2A-11": "Öğrenci 3",
+  "39-92-FB-03": "Öğrenci 4"
+};
+
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+db.ref("/ogrenciler/"+uid).on("value",snapshot=>{
+  const data=snapshot.val();
+  if(!data) return;
+
+  const icerde=data.iceride;
+  const name = uidToName[uid.toUpperCase()] || "Bilinmeyen Öğrenci";
+
+  document.getElementById("durum").innerText =
+    icerde ? name + " : İçeride" : name + " : Dışarıda";
+
+  document.getElementById("uyari").style.display =
+    data.uyari === true ? "block" : "none";
+});
+
+function cikisOnayi(){
+  db.ref("/ogrenciler/"+uid+"/iceride").set(false);
+  db.ref("/ogrenciler/"+uid+"/uyari").set(false);
+}
+</script>
+
+</body>
+</html>
