@@ -9,6 +9,10 @@ A real-time IoT-based library occupancy monitoring system using ESP8266, RFID/NF
 ![Firebase](https://img.shields.io/badge/Firebase-Realtime%20Database-f59e0b?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Completed-22c55e?style=for-the-badge)
 
+<br>
+
+[![Live Website](https://img.shields.io/badge/Live%20Website-Visit%20The%20Website-0f172a?style=for-the-badge)](https://la-prmtsr.github.io/iot-smart-library/)
+
 </div>
 
 ---
