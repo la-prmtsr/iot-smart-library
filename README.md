@@ -1,17 +1,16 @@
 <div align="center">
 
-# Smart Library IoT Capacity Monitoring System
+# · Smart Library · IoT ·
+A real-time IoT prototype for monitoring library occupancy using ESP8266, RFID/NFC, Firebase Realtime Database, LCD display, Blynk, and a web dashboard.
 
-A real-time IoT-based library occupancy monitoring system using ESP8266, RFID/NFC, Firebase Realtime Database, LCD display, Blynk, and a web dashboard.
-
-![IoT](https://img.shields.io/badge/IoT-Project-2563eb?style=for-the-badge)
-![ESP8266](https://img.shields.io/badge/NodeMCU-ESP8266-16a34a?style=for-the-badge)
-![Firebase](https://img.shields.io/badge/Firebase-Realtime%20Database-f59e0b?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Completed-22c55e?style=for-the-badge)
+[![IoT](https://img.shields.io/badge/IoT-Uni%20Project-16a34a?style=flat)](#)
+[![ESP8266](https://img.shields.io/badge/NodeMCU-ESP8266-f59e0b?style=flat)](#)
+[![Firebase](https://img.shields.io/badge/Firebase-Realtime%20Database-2f2f2f?style=flat)](#)
+[![RFID](https://img.shields.io/badge/Tag-RFID/NFC-2563eb?style=flat)](#)
 
 <br>
 
-[![Live Website](https://img.shields.io/badge/Live%20Website-Visit%20The%20Website-0f172a?style=for-the-badge)](https://la-prmtsr.github.io/iot-smart-library/)
+[![Website](https://img.shields.io/badge/Website-IoT%20Smart%20Library-ff69b4?style=flat)](https://la-prmtsr.github.io/iot-smart-library/)
 
 </div>
 
@@ -23,22 +22,7 @@ Smart Library IoT Capacity Monitoring System is an IoT prototype designed to mon
 
 The project was developed to solve a real campus problem. During exam periods, students often go to the library without knowing whether there are available seats. This system allows students to check the current library capacity remotely before going there.
 
-The system uses RFID/NFC cards for student entry and exit tracking. The NodeMCU ESP8266 processes card data and sends real-time updates to Firebase Realtime Database. The data is then displayed through a modern web dashboard, student panel, LCD display, and Blynk mobile dashboard.
-
----
-
-## Key Features
-
-- Real-time capacity monitoring
-- RFID/NFC-based student identification
-- Firebase Realtime Database integration
-- Web dashboard with live capacity chart
-- Student-specific status panel
-- Exit reminder system
-- LCD entrance display
-- Buzzer feedback for system events
-- Blynk IoT mobile monitoring
-- Modern landing page for portfolio presentation
+The system uses RFID/NFC cards for student entry and exit tracking. The NodeMCU ESP8266 processes card data and sends real-time updates to Firebase Realtime Database. The updated data is displayed through a web dashboard, student panel, LCD display, and Blynk mobile dashboard.
 
 ---
 
@@ -54,11 +38,11 @@ This creates several problems:
 - Lack of remote availability information
 - Poor space management
 
-This project provides a real-time solution that helps students check library availability before arriving.
+This project provides a real-time monitoring solution that helps students check library availability before arriving.
 
 ---
 
-## System Architecture
+## Core System Flow
 
 ```txt
 RFID / NFC Card
@@ -73,6 +57,39 @@ Web Dashboard / Student Panel / Blynk App
       ↓
 LCD Display + Buzzer Feedback
 ```
+
+---
+
+## Key Features
+
+- Real-time library capacity monitoring
+- RFID/NFC-based student identification
+- ESP8266 Wi-Fi communication
+- Firebase Realtime Database synchronization
+- Web dashboard with live capacity chart
+- Student-specific status panel
+- LCD entrance display
+- Buzzer feedback for system events
+- Exit reminder and manual exit confirmation
+- Blynk IoT mobile monitoring
+
+---
+
+## System Components
+
+The prototype is organized around the main IoT data flow: student identification, real-time capacity updates, cloud synchronization, and user-facing display.
+
+| Component | Role in the System |
+|---|---|
+| RFID/NFC Cards | Identify students using unique card UIDs |
+| MFRC522 RFID Reader | Reads the scanned card UID |
+| NodeMCU ESP8266 | Processes entry/exit logic and sends updates through Wi-Fi |
+| Firebase Realtime Database | Stores and synchronizes capacity and student status in real time |
+| Web Dashboard | Displays live capacity, library status, and chart visualization |
+| Student Panel | Shows student-specific inside/outside status and exit confirmation |
+| LCD Display | Shows entrance capacity and availability status |
+| Blynk App | Provides mobile monitoring for the IoT prototype |
+| Buzzer | Gives physical feedback for entry, exit, warning, and error events |
 
 ---
 
@@ -97,59 +114,17 @@ LCD Display + Buzzer Feedback
 | Arduino IDE | Microcontroller programming |
 | Firebase Realtime Database | Cloud-based real-time data storage |
 | Blynk IoT | Mobile IoT monitoring |
-| HTML | Web page structure |
-| CSS | Web styling |
-| JavaScript | Frontend logic and Firebase listener |
+| HTML | Web interface structure |
+| CSS | Web interface styling |
+| JavaScript | Firebase listener and frontend logic |
 | Tailwind CSS | Landing page styling |
 | Chart.js | Live capacity chart |
 
 ---
 
-## Web Pages
-
-### Landing Page
-
-A modern portfolio-style page that introduces the project, including:
-
-- Project overview
-- Concept sketch
-- Final 3D layout
-- System architecture
-- Features
-- Hardware components
-- Demo links
-
-### Dashboard Page
-
-The dashboard displays:
-
-- Current library capacity
-- Library status
-- Real-time capacity chart
-- Firebase synchronized updates
-
-### Student Panel
-
-Each student can access a personalized panel using their UID.
-
-Example:
-
-```txt
-student.html?uid=43-44-84-2D
-```
-
-The student panel displays:
-
-- Student name
-- Inside / outside status
-- Exit reminder warning
-- Exit confirmation button
-
----
-
 ## RFID/NFC Card Logic
 
-Each card has a unique UID. The system checks whether the scanned UID is registered as an authorized card.
+Each RFID/NFC card has a unique UID. The system checks whether the scanned UID belongs to a registered student.
 
 Example UID mapping:
 
@@ -194,54 +169,13 @@ When a student exits:
 capacity = capacity + 1
 ```
 
-The updated capacity is sent to Firebase and displayed in real time on the web dashboard.
+The updated capacity is sent to Firebase and displayed in real time on the dashboard, LCD display, and Blynk app.
 
 ---
 
-## LCD Display
+## Firebase Realtime Database
 
-The LCD display is used as an entrance information screen.
-
-Example output when seats are available:
-
-```txt
-Kapasite: 3
-Status: AVAILABLE
-```
-
-Example output when the library is full:
-
-```txt
-Kapasite: 0
-Status: FULL
-```
-
----
-
-## Buzzer Feedback
-
-The buzzer provides physical feedback for system events.
-
-| Event | Feedback |
-|---|---|
-| Authorized entry | Entry sound |
-| Authorized exit | Exit sound |
-| Unauthorized card | Error sound |
-| Full capacity | Warning sound |
-
----
-
-## Exit Reminder System
-
-If a student enters the library but forgets to scan their card while leaving, the system can trigger a warning.
-
-For demonstration purposes, the waiting duration is simulated using a short time such as 5 or 10 seconds.
-
-The student can confirm exit from the student panel. After confirmation, Firebase updates the student status and the capacity is corrected.
-
----
-
-## Firebase Realtime Database Structure
+Firebase Realtime Database stores the current library capacity, system status, timestamp, and student entry/exit state.
 
 Example database structure:
 
@@ -265,53 +199,84 @@ Example database structure:
 }
 ```
 
----
-
-## Project Structure
-
-```txt
-smart-library-iot/
-│
-├── landing.html
-├── index.html
-├── student.html
-│
-├── css/
-│   └── landing.css
-│
-├── js/
-│   └── landing.js
-│
-├── assets/
-│   ├── concept-sketch.png
-│   └── smart-library-3d-render.png
-│
-└── README.md
-```
+Firebase was selected because it supports real-time synchronization and allows the dashboard to update without refreshing the page.
 
 ---
 
-## How to Run
+## Interface Layer
 
-Clone the repository:
+The system includes several output interfaces to make the real-time capacity data visible to users and administrators.
 
-```bash
-git clone https://github.com/your-username/smart-library-iot.git
-```
+### Web Dashboard
 
-Open the project folder:
+The dashboard displays:
 
-```bash
-cd smart-library-iot
-```
+- Current library capacity
+- Library availability status
+- Real-time capacity chart
+- Firebase-synchronized updates
 
-Open the landing page:
+### Student Panel
+
+Each student can access a personalized panel using their RFID UID.
+
+Example:
 
 ```txt
-landing.html
+student.html?uid=43-44-84-2D
 ```
 
-You can also use the Live Server extension in Visual Studio Code.
+The student panel displays:
+
+- Student name
+- Inside / outside status
+- Exit reminder warning
+- Exit confirmation button
+
+### LCD Display
+
+The LCD display acts as an entrance information screen.
+
+Example output when seats are available:
+
+```txt
+Kapasite: 3
+Status: AVAILABLE
+```
+
+Example output when the library is full:
+
+```txt
+Kapasite: 0
+Status: FULL
+```
+
+### Blynk Mobile Dashboard
+
+Blynk is used as a mobile monitoring interface for checking the prototype status from a phone.
+
+---
+
+## Buzzer Feedback
+
+The buzzer provides physical feedback for different system events.
+
+| Event | Feedback |
+|---|---|
+| Authorized entry | Entry sound |
+| Authorized exit | Exit sound |
+| Unauthorized card | Error sound |
+| Full capacity | Warning sound |
+
+---
+
+## Exit Reminder System
+
+If a student enters the library but forgets to scan their card while leaving, the system can trigger a warning.
+
+For demonstration purposes, the waiting duration is simulated using a short time such as 5 or 10 seconds.
+
+The student can confirm exit from the student panel. After confirmation, Firebase updates the student status and the capacity is corrected.
 
 ---
 
@@ -325,32 +290,45 @@ This assumption was made to keep the prototype low-cost and suitable for demonst
 
 ---
 
-## Why Firebase Realtime Database?
+## Repository Contents
 
-Firebase Realtime Database was selected because:
-
-- It supports real-time data synchronization
-- It is simple to integrate with web applications
-- It works well for small IoT data structures
-- It allows live dashboard updates without refreshing the page
-- It is suitable for a real-time IoT monitoring prototype
-
-This project is not a Big Data project. It is a real-time IoT monitoring system.
+```txt
+iot-smart-library/
+│
+├── landing.html        # Project introduction and demo page
+├── index.html          # Real-time capacity dashboard
+├── student.html        # Student status and exit confirmation panel
+│
+├── css/                # Interface styling
+├── js/                 # Firebase listener and dashboard logic
+├── assets/             # Project visuals and prototype images
+│
+└── README.md
+```
 
 ---
 
-## Future Improvements
+## How to Run
 
-- Add table-level seat sensors
-- Add multiple RFID readers for different entrances
-- Store historical usage data
-- Add crowded-hour prediction
-- Add admin login system
-- Improve Firebase security rules
-- Add mobile notifications
-- Integrate with university student ID cards
-- Deploy the dashboard online
-- Add analytics for library usage patterns
+Clone the repository:
+
+```bash
+git clone https://github.com/la-prmtsr/iot-smart-library.git
+```
+
+Open the project folder:
+
+```bash
+cd iot-smart-library
+```
+
+Open the landing page:
+
+```txt
+landing.html
+```
+
+You can also use the Live Server extension in Visual Studio Code.
 
 ---
 
@@ -379,6 +357,19 @@ Add real credential files to `.gitignore`.
 
 ---
 
+## Future Improvements
+
+- Add table-level seat sensors
+- Add multiple RFID readers for different entrances
+- Store historical usage data
+- Add crowded-hour prediction
+- Improve Firebase security rules
+- Add mobile notifications
+- Integrate with university student ID cards
+- Add analytics for library usage patterns
+
+---
+
 ## Team Members
 
 - Mutia Maharani Kusuma
@@ -389,30 +380,14 @@ Add real credential files to `.gitignore`.
 
 ## Course Information
 
-Sakarya University  
-Faculty of Computer and Information Sciences  
-Computer Engineering Department  
 Course: Internet of Things and Applications
 
----
+Computer Engineering Department  
 
-## Project Status
-
-| Module | Status |
-|---|---|
-| RFID/NFC Reading | Completed |
-| ESP8266 Wi-Fi Connection | Completed |
-| Firebase Integration | Completed |
-| Web Dashboard | Completed |
-| Student Panel | Completed |
-| LCD Display | Completed |
-| Buzzer Feedback | Completed |
-| Landing Page | Completed |
+Sakarya University · Faculty of Computer and Information Sciences  
 
 ---
 
 ## License
 
 This project was developed for educational purposes.
-
-You may use and modify it for learning, academic, and portfolio purposes.
